@@ -1,0 +1,12 @@
+{
+  "routes": {
+    "/clicauto": {},
+    "/clicauto/auth": {},
+    "/clicauto/auth/login": {},
+    "/clicauto/auth/mot-de-passe-oublie": {},
+    "/clicauto/auth/reset-password": {},
+    "/clicauto/gerant": {},
+    "/clicauto/gerant/dashboard": {},
+    "/clicauto/gerant/location": {}
+  }
+}
