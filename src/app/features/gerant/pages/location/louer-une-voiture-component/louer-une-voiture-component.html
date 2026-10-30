@@ -1,0 +1,445 @@
+<!-- <div class="form-container">
+  <div class="form-header">
+    <div class="header-logo">
+      <span class="logo-icon">🚗</span>
+      <div>
+        <h2 class="logo-title">AutoSaaS <span>Location</span></h2>
+        <p class="logo-sub">Gestion Automobile</p>
+      </div>
+    </div>
+    <div class="header-doc">
+      <label>N° Contrat</label>
+      <input type="text" value="LOC-000451" readonly class="doc-number" />
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <div class="col">
+      <div class="col-title">👤 Renseignements Clients</div>
+      
+      <div class="field">
+        <label>Payable par</label>
+        <input type="text" [(ngModel)]="formData().client.nom" name="payable" placeholder="Nom du payeur">
+      </div>
+      <div class="field">
+        <label>Locataire</label>
+        <input type="text" [(ngModel)]="formData().client.nom" name="locataire" placeholder="Nom du client">
+      </div>
+      <div class="field">
+        <label>Domicile à</label>
+        <input type="text" [(ngModel)]="formData().client.adresse" name="adresse" placeholder="Adresse">
+      </div>
+      <div class="field">
+        <label>Téléphone</label>
+        <input type="tel" [(ngModel)]="formData().client.tel" name="tel" placeholder="+221 ...">
+      </div>
+      <div class="field">
+        <label>Adresse locale</label>
+        <input type="text" [(ngModel)]="formData().client.adresse" name="adresseLocale" placeholder="Adresse locale">
+      </div>
+      <div class="field">
+        <label>Téléphone</label>
+        <input type="tel" [(ngModel)]="formData().client.tel" name="tel2" placeholder="+221 ...">
+      </div>
+      <div class="field">
+        <label>PCN</label>
+        <input type="text" [(ngModel)]="formData().client.pc" name="pcn" placeholder="N° PCN">
+      </div>
+      <div class="field">
+        <label>Du</label>
+        <input type="date" [(ngModel)]="formData().location.dateDepart" name="du">
+      </div>
+      <div class="field">
+        <label>Au</label>
+        <input type="date" [(ngModel)]="formData().location.dateRetour" name="au">
+      </div>
+      <div class="field">
+        <label>Date et Lieu de naissance</label>
+        <input type="text" [(ngModel)]="formData().client.dateNaissance" name="naissance" placeholder="Ex : 01/01/1990 Dakar">
+      </div>
+      <div class="field">
+        <label>Autres pièces</label>
+        <input type="text" [(ngModel)]="formData().client.autres" name="autres" placeholder="Ex : Passeport, Permis...">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col-title">🚙 Véhicule</div>
+
+      <div class="field">
+        <label>Marque</label>
+        <input type="text" [(ngModel)]="formData().vehicule.marque" name="marque" placeholder="Toyota, Hyundai...">
+      </div>
+      <div class="field">
+        <label>Immatriculation</label>
+        <input type="text" [(ngModel)]="formData().vehicule.immatriculation" name="immat" placeholder="DK-1234-AB" class="input-uppercase">
+      </div>
+      <div class="field">
+        <label>Km Retour</label>
+        <input type="number" [(ngModel)]="formData().vehicule.kmRetour" name="kmRetour" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Type de Carburant</label>
+        <select [(ngModel)]="formData().vehicule.typeCarburant" name="carburant">
+          <option value="Essence">Essence</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Electrique">Électrique</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Km Départ</label>
+        <input type="number" [(ngModel)]="formData().vehicule.kmDepart" name="kmDepart" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Km Roulé</label>
+        <input type="number" [(ngModel)]="formData().vehicule.kmRetour" name="kmRoule" placeholder="Calculé automatiquement" readonly>
+      </div>
+
+      <div class="field">
+        <label>Le Client Lu et Approuvé</label>
+        <div class="radio-group">
+          <label class="radio-btn">
+            <input type="radio" name="approbation" value="ACCEPTE" [(ngModel)]="formData().accepte"> 
+            <span>ACCEPTE</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="approbation" value="REFUSE" [(ngModel)]="formData().accepte"> 
+            <span>REFUSE</span>
+          </label>
+        </div>
+        <p class="field-hint">Ainsi par sa signature, le locataire a accepté les règlements de l'entreprise qui lui ont été remis comme écrit sur le dos de la copie de son contrat.</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col-title">💰 Facturation</div>
+
+      <div class="field">
+        <label>L. Départ</label>
+        <input type="date" [(ngModel)]="formData().location.dateDepart" name="lDepart">
+      </div>
+      <div class="field">
+        <label>Heure Départ</label>
+        <input type="time" [(ngModel)]="formData().location.heureDepart" name="hDepart">
+      </div>
+      <div class="field">
+        <label>Rendre Véhicule à</label>
+        <input type="text" [(ngModel)]="formData().location.dateRetour" name="rendre" placeholder="Lieu de retour">
+      </div>
+      <div class="field">
+        <label>Date et Heure de Retour</label>
+        <input type="datetime-local" [(ngModel)]="formData().location.dateRetour" name="dateRetour">
+      </div>
+
+      <div class="field">
+        <label>Nombre Jours</label>
+        <input type="number" [(ngModel)]="formData().location.nombreJours" name="nbJours" placeholder="1">
+      </div>
+      <div class="field">
+        <label>Prix / Jour</label>
+        <input type="number" [(ngModel)]="formData().location.prixJour" name="prixJour" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Prix Temps</label>
+        <input type="number" [(ngModel)]="formData().location.prixJour" name="prixTemps" placeholder="0" readonly>
+      </div>
+
+      <div class="field">
+        <label>Total Km en Charge</label>
+        <input type="number" [(ngModel)]="formData().location.kmCharge" name="kmCharge" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Prix / Km</label>
+        <input type="number" [(ngModel)]="formData().location.prixKm" name="prixKm" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Total / Km</label>
+        <input type="number" [(ngModel)]="formData().location.prixKm" name="totalKm" placeholder="0" readonly>
+      </div>
+
+      <div class="section-separator"></div>
+
+      <div class="field">
+        <label>Prix TSP + Km</label>
+        <input type="number" [(ngModel)]="formData().facturation.prixTSP" name="prixTSP" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Société</label>
+        <input type="text" [(ngModel)]="formData().facturation.societe" name="societe" placeholder="Nom société">
+      </div>
+      <div class="field">
+        <label>Ass. Pers. Transportées</label>
+        <input type="text" [(ngModel)]="formData().facturation.assPertes" name="assPertes" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Chauffeur</label>
+        <input type="text" [(ngModel)]="formData().facturation.chauffeur" name="chauffeur" placeholder="Nom chauffeur">
+      </div>
+      <div class="field">
+        <label>Total Hors Taxe</label>
+        <input type="number" placeholder="0" readonly class="result-field">
+      </div>
+      <div class="field">
+        <label>TVA Gouv.</label>
+        <input type="number" placeholder="0" readonly class="result-field">
+      </div>
+      <div class="field">
+        <label>Carburant</label>
+        <input type="number" [(ngModel)]="formData().facturation.carburant" name="carburant" placeholder="0">
+      </div>
+      <div class="field">
+        <label>A Rembourser</label>
+        <input type="number" [(ngModel)]="formData().facturation.rembourser" name="rembourser" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Total Facture</label>
+        <input type="number" placeholder="0" readonly class="result-field">
+      </div>
+      <div class="field">
+        <label>Déduction</label>
+        <input type="number" [(ngModel)]="formData().facturation.deduction" name="deduction" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Net A Payer</label>
+        <input type="number" placeholder="0" readonly class="result-field highlight-result">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footer-grid">
+    <div class="footer-col observations">
+      <div class="col-title">📝 Observations</div>
+      <textarea [(ngModel)]="formData().observations" name="obs" rows="5" placeholder="Notes sur l'état du véhicule, conditions particulières..."></textarea>
+    </div>
+
+    <div class="footer-col paiement">
+      <div class="col-title">💳 Mode de Paiement</div>
+      <div class="payment-options">
+        <label><input type="radio" name="mode" value="Espece" [(ngModel)]="formData().paiement.mode"> Espèce</label>
+        <label><input type="radio" name="mode" value="Cheque" [(ngModel)]="formData().paiement.mode"> Chèque Certifié</label>
+        <label><input type="radio" name="mode" value="Carte" [(ngModel)]="formData().paiement.mode"> Carte Crédit</label>
+      </div>
+
+      <div class="field">
+        <label>Dépôt de garantie</label>
+        <input type="text" [(ngModel)]="formData().paiement.depot" name="depot" placeholder="Montant">
+      </div>
+
+      <div class="field">
+        <label>Empreinte carte crédit</label>
+        <input type="text" [(ngModel)]="formData().paiement.empreinte" name="empreinte" placeholder="VISA, AMEX...">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-actions">
+    <button class="btn-cancel" (click)="router.navigate(['/auto/locations'])">Annuler</button>
+    <button class="btn-save" (click)="saveContract()">💾 Enregistrer le contrat</button>
+  </div>
+</div> -->
+
+<div class="form-container">
+  <div class="form-header">
+    <div class="header-logo">
+      <span class="logo-icon">🚗</span>
+      <div>
+        <h2 class="logo-title">AutoSaaS <span>Location</span></h2>
+        <p class="logo-sub">Nouveau contrat</p>
+      </div>
+    </div>
+    <button class="btn-print" (click)="window.print()">🖨️ Imprimer</button>
+  </div>
+
+  <!-- ÉTAPE 1 : CLIENT -->
+  <div class="step-block">
+    <div class="step-title">1. Client</div>
+    
+    <!-- Recherche dynamique -->
+    @if (!clientSelectionne() && !estNouveauClient()) {
+      <div class="search-area">
+        <div class="search-box">
+          <input type="text" [(ngModel)]="rechercheClient" name="rechercheClient" placeholder="🔍 Taper le nom ou le numéro de téléphone..." autocomplete="off">
+          <button class="btn-new" (click)="activerNouveauClient()">+ Nouveau</button>
+        </div>
+
+        @if (filteredClients().length > 0) {
+          <div class="search-results">
+            @for (c of filteredClients(); track c.id) {
+              <div class="result-item" (click)="selectClient(c)">
+                <div class="res-info">
+                  <strong>{{ c.nom }}</strong>
+                  <span>📞 {{ c.tel }} | {{ c.adresse }}</span>
+                </div>
+                <span class="res-arrow">→</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Client sélectionné -->
+    @if (clientSelectionne()) {
+      <div class="selected-card">
+        <div>
+          <strong>{{ clientSelectionne().nom }}</strong>
+          <p>📞 {{ clientSelectionne().tel }} | {{ clientSelectionne().adresse }} | Permis: {{ clientSelectionne().permis }}</p>
+        </div>
+        <button class="btn-small" (click)="clientSelectionne.set(null); estNouveauClient.set(false)">Modifier</button>
+      </div>
+    }
+
+    <!-- Nouveau client -->
+    @if (estNouveauClient() && !clientSelectionne()) {
+      <div class="new-client-form">
+        <h4>Nouveau client</h4>
+        <div class="field-row">
+          <div class="field"><label>Nom complet</label><input type="text" placeholder="Ex: Jean Dupont"></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" placeholder="+221 ..."></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Adresse</label><input type="text" placeholder="Dakar, ..."></div>
+          <div class="field"><label>N° Permis</label><input type="text" placeholder="PCN-..."></div>
+        </div>
+        <div class="new-client-actions">
+          <button class="btn-small" (click)="estNouveauClient.set(false)">Annuler</button>
+          <button class="btn-small-save" (click)="clientSelectionne.set({nom:'Nouveau Client', tel:'...', adresse:'...', permis:'...'}); estNouveauClient.set(false)">✅ Enregistrer le client</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- ÉTAPE 2 : VÉHICULE & DATES -->
+  <div class="step-block">
+    <div class="step-title">2. Véhicule & Durée</div>
+
+    <!-- Recherche dynamique véhicule -->
+    @if (!vehiculeSelectionne()) {
+      <div class="search-area">
+        <div class="search-box">
+          <input type="text" [(ngModel)]="rechercheVehicule" name="rechercheVehicule" placeholder="🔍 Taper marque ou immatriculation..." autocomplete="off">
+        </div>
+
+        @if (filteredVehicles().length > 0) {
+          <div class="search-results">
+            @for (v of filteredVehicles(); track v.id) {
+              <div class="result-item" (click)="selectVehicle(v)">
+                <div class="res-info">
+                  <strong>{{ v.marque }}</strong>
+                  <span>📍 {{ v.immat }} | {{ v.carburant }} | {{ v.prixJour }} FCFA/jour</span>
+                </div>
+                <span class="res-arrow">→</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Véhicule sélectionné (Infos remplies automatiquement) -->
+    @if (vehiculeSelectionne()) {
+      <div class="selected-vehicle-card">
+        <div class="veh-top">
+          <div>
+            <h4>{{ vehiculeSelectionne().marque }}</h4>
+            <span class="veh-immat">📍 {{ vehiculeSelectionne().immat }}</span>
+          </div>
+          <button class="btn-small" (click)="vehiculeSelectionne.set(null)">Modifier</button>
+        </div>
+        <div class="veh-details">
+          <div class="veh-detail-item">
+            <label>Carburant</label>
+            <span>⛽ {{ vehiculeSelectionne().carburant }}</span>
+          </div>
+          <div class="veh-detail-item">
+            <label>Prix / Jour</label>
+            <span>{{ vehiculeSelectionne().prixJour }} FCFA</span>
+          </div>
+          <div class="veh-detail-item">
+            <label>Km Actuel</label>
+            <span>📊 {{ vehiculeSelectionne().kmActuel }} km</span>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Dates -->
+    <div class="field-row dates-row">
+      <div class="field">
+        <label>Départ</label>
+        <div class="date-time">
+          <input type="date" [(ngModel)]="dateDepart" name="dateDep">
+          <input type="time" [(ngModel)]="heureDepart" name="heureDep">
+        </div>
+      </div>
+      <div class="field">
+        <label>Retour</label>
+        <div class="date-time">
+          <input type="date" [(ngModel)]="dateRetour" name="dateRet">
+          <input type="time" [(ngModel)]="heureRetour" name="heureRet">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 : FACTURATION AUTOMATIQUE -->
+  <div class="step-block">
+    <div class="step-title">3. Facturation (Automatique)</div>
+
+    <div class="facture-grid">
+      <div class="fact-item">
+        <label>Nombre de jours</label>
+        <div class="fact-value">{{ nbJours() }}</div>
+      </div>
+      <div class="fact-item">
+        <label>Prix Temps</label>
+        <div class="fact-value">{{ prixTemps() }} F</div>
+      </div>
+      <div class="fact-item">
+        <label>Km retour (lu)</label>
+        <input type="number" [(ngModel)]="kmRetour" name="kmRetour" placeholder="Ex: 13000">
+      </div>
+      <div class="fact-item">
+        <label>Total Km parcourus</label>
+        <div class="fact-value">{{ totalKm() }} km</div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Dépôt de garantie (Caution)</label>
+        <input type="number" [(ngModel)]="depotGarantie" name="caution" placeholder="Ex: 100000">
+      </div>
+      <div class="field">
+        <label>Mode de paiement</label>
+        <select [(ngModel)]="modePaiement" name="mode">
+          <option value="Espece">💵 Espèce</option>
+          <option value="Cheque">🏦 Chèque certifié</option>
+          <option value="Carte">💳 Carte crédit</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="total-block">
+      <div>
+        <span>Total à payer (Location + Km + Taxes)</span>
+        <strong>{{ totalAPayer() | number:'1.0-0' }} FCFA</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBSERVATIONS -->
+  <div class="step-block">
+    <div class="step-title">4. Observations & État</div>
+    <textarea [(ngModel)]="observations" name="obs" rows="3" placeholder="État du véhicule au départ (rayures, niveau d'essence, pneus..."></textarea>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="form-actions">
+    <button class="btn-cancel" (click)="router.navigate(['/auto/locations'])">Annuler</button>
+    <button class="btn-save" (click)="enregistrer()" [disabled]="!clientSelectionne() || !vehiculeSelectionne()">💾 Enregistrer le contrat</button>
+  </div>
+</div>

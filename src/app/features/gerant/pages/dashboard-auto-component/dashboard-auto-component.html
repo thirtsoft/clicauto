@@ -1,0 +1,236 @@
+<!-- <div class="dashboard-content">
+  <div class="content-header">
+    <div>
+      <h2>🚗 Tableau de bord</h2>
+      <p>Gestion de votre flotte automobile</p>
+    </div>
+    <button class="btn-primary" (click)="naviguer('/auto/vehicules/ajout')">
+      + Ajouter un véhicule
+    </button>
+  </div>
+
+  <div class="kpis-grid">
+    @for (k of kpis(); track k.label) {
+      <div class="kpi-card" [class]="'kc-' + k.cls">
+        <div class="kc-top">
+          <span class="kc-ico">{{ k.ico }}</span>
+          <span class="kc-var" [class.pos]="k.var > 0" [class.neg]="k.var < 0">
+            {{ k.var > 0 ? '↑ +' + k.var : k.var < 0 ? '↓ ' + k.var : '—' }}%
+          </span>
+        </div>
+        <div class="kc-val">{{ k.val }}</div>
+        <div class="kc-lbl">{{ k.label }}</div>
+      </div>
+    }
+  </div>
+
+  <div class="duo-grid">
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Ventes mensuelles</h3>
+      </div>
+      <div class="bar-chart">
+        @for (v of ventesParMois; track v.mois) {
+          <div class="bc-col">
+            <span class="bc-amount">{{ (v.montant / 1000).toFixed(0) + 'k' }}</span>
+            <div class="bc-bar-outer">
+              <div class="bc-bar-inner" [style.height.%]="barHeight(v.montant)"></div>
+            </div>
+            <span class="bc-lbl">{{ v.mois }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Locations en cours</h3>
+      </div>
+      @if (locations.length === 0) {
+        <p class="empty-state">Aucune location active</p>
+      }
+      @for (loc of locations; track loc.id) {
+        <div class="loc-row">
+          <div class="loc-dot" [class]="statutLoc(loc).cls"></div>
+          <div class="loc-info">
+            <span>{{ loc.client }}</span>
+            <small>{{ loc.vehicule }}</small>
+          </div>
+          <div class="loc-right">
+            <span>{{ loc.duree }} jours</span>
+            <span class="badge" [class]="statutLoc(loc).cls">
+              {{ statutLoc(loc).label }}
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h3>Maintenance programmée</h3>
+      <button class="card-link" (click)="naviguer('/auto/maintenance')">
+        Voir tout →
+      </button>
+    </div>
+    @if (maintenances.length === 0) {
+      <p class="empty-state">Aucune maintenance programmée</p>
+    }
+    @for (m of maintenances; track m.id) {
+      <div class="mt-item">
+        <span class="mt-nom">{{ m.vehicule }}</span>
+        <span class="mt-type">{{ m.type }}</span>
+        <span class="badge" [class]="statutMaintenance(m).cls">
+          {{ statutMaintenance(m).label }}
+        </span>
+        <span class="mt-date">{{ m.date | date:'dd/MM/yyyy' }}</span>
+      </div>
+    }
+  </div>
+</div> -->
+
+<div class="dash-container">
+  <!-- HEADER -->
+  <div class="dash-header">
+    <div>
+      <h1 class="dash-title">Tableau de bord de l'agence</h1>
+      <p class="dash-subtitle">Suivi en temps réel de la flotte</p>
+    </div>
+    <div class="dash-actions">
+      <button class="btn btn-primary"  routerLink="/gerant/location">
+        <span class="btn-ico">🔑</span> Louer une voiture
+      </button>
+      <button class="btn btn-secondary" routerLink="/auto/ventes/nouvelle">
+        <span class="btn-ico">💰</span> Vendre une voiture
+      </button>
+    </div>
+  </div>
+
+  @if (dataService.dashboardData()?.overdueCount; as overdue) {
+    <div class="alert-banner">
+      <div class="alert-content">
+        <span class="alert-ico">🔴</span>
+        <span class="alert-text">
+          <strong>{{ overdue }} clients</strong> ont dépassé la date de retour !
+        </span>
+      </div>
+      <button class="alert-btn" routerLink="/auto/locations/retards">Voir les retards</button>
+    </div>
+  }
+
+  <!-- SECTION KPI -->
+  @if (dataService.dashboardData(); as data) {
+    <div class="kpi-grid">
+      <!-- KPI 1 : Louées -->
+      <div class="kpi-card">
+        <div class="kpi-icon">🚗</div>
+        <div class="kpi-info">
+          <span class="kpi-value">{{ data.rentedVehicles }}</span>
+          <span class="kpi-label">Voitures louées</span>
+          <span class="kpi-detail"
+            >Reste {{ data.totalVehicles - data.rentedVehicles }} libres</span
+          >
+        </div>
+      </div>
+
+      <!-- KPI 2 : Retours aujourd'hui -->
+      <div class="kpi-card">
+        <div class="kpi-icon">🕐</div>
+        <div class="kpi-info">
+          <span class="kpi-value">{{ data.returnsToday }}</span>
+          <span class="kpi-label">Retours aujourd'hui</span>
+        </div>
+      </div>
+
+      <!-- KPI 3 : Total Locations du mois -->
+      <div class="kpi-card highlight">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-info">
+          <span class="kpi-value"
+            >{{ data.monthlyRentalRevenue | number: '1.0-0' }} <small>FCFA</small></span
+          >
+          <span class="kpi-label">Total locations du mois</span>
+        </div>
+      </div>
+
+      <!-- KPI 4 : Vendues -->
+      <div class="kpi-card">
+        <div class="kpi-icon">🚙</div>
+        <div class="kpi-info">
+          <span class="kpi-value">{{ data.vehiclesSold }}</span>
+          <span class="kpi-label">Vendues ce mois</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 COLONNES -->
+    <div class="main-grid">
+      <!-- Colonne Gauche : Tableau des retours -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Voitures à récupérer</h3>
+        </div>
+
+        <div class="returns-table">
+          <div class="table-header">
+            <span>Voiture</span>
+            <span>Client</span>
+            <span>Heure</span>
+            <span>Statut</span>
+          </div>
+
+          @for (ret of data.returnsList; track ret.id) {
+            <div class="table-row">
+              <span class="cell-vehicle">{{ ret.vehicle }}</span>
+              <span class="cell-client">{{ ret.client }}</span>
+              <span class="cell-time">{{ ret.time }}</span>
+              <span class="status-badge" [ngClass]="getStatusClass(ret.status)">
+                {{ ret.status === 'LATE' ? '🔴 En retard' : '🟠 À venir' }}
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Colonne Droite : Vente & État du parc -->
+      <div class="side-panels">
+        <!-- Dernière vente -->
+        @if (data.lastSale; as sale) {
+          <div class="sale-card">
+            <span class="sale-badge">✅ Dernière vente</span>
+            <h4 class="sale-vehicle">{{ sale.vehicle }}</h4>
+            <p class="sale-buyer">Acheteur : {{ sale.buyer }}</p>
+            <p class="sale-amount">{{ sale.amount | number: '1.0-0' }} FCFA</p>
+          </div>
+        }
+
+        <!-- État du parc (Sans graphique, juste des compteurs) -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>État du parc</h3>
+          </div>
+
+          <div class="parc-stats">
+            <div class="parc-item">
+              <span class="parc-dot dot-blue"></span>
+              <span class="parc-label">Louées</span>
+              <span class="parc-value">{{ data.rentedVehicles }}</span>
+            </div>
+            <div class="parc-item">
+              <span class="parc-dot dot-green"></span>
+              <span class="parc-label">Libres</span>
+              <span class="parc-value">{{ data.totalVehicles - data.rentedVehicles }}</span>
+            </div>
+            <div class="parc-item">
+              <span class="parc-dot dot-gray"></span>
+              <span class="parc-label">À vendre</span>
+              <span class="parc-value">{{ data.vehiclesSold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

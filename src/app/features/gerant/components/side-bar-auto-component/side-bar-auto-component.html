@@ -1,0 +1,46 @@
+<!-- side-bar-auto-component.html -->
+<div class="sidebar" [class.collapsed]="collapsed()" [class.drawer-open]="open()">
+  <!-- Brand -->
+  <div class="sb-brand">
+    <div class="sb-logo">🚗</div>
+    <div class="sb-brand-text">
+      <span class="sb-name">AutoSaaS</span>
+      <span class="sb-sub">Gestion automobile</span>
+    </div>
+    <button class="sb-toggle" (click)="handleToggleClick()" title="Réduire">
+      {{ collapsed() ? '→' : '←' }}
+    </button>
+  </div>
+
+  <!-- Profil -->
+  <div class="sb-profile">
+    <div class="sb-ava">A</div>
+    <div class="sb-pinfo">
+      <span class="sb-pnom">Admin Auto</span>
+      <span class="sb-pmail">admin@autosaas.com</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sb-nav">
+    @for (item of nav; track item.route) {
+      <button
+        class="sb-item"
+        [class.active]="isActive(item.route)"
+        (click)="naviguer(item.route)"
+        [title]="item.label"
+      >
+        <span class="sb-ico">{{ item.ico }}</span>
+        <span class="sb-label">{{ item.label }}</span>
+      </button>
+    }
+  </nav>
+
+  <!-- Footer -->
+  <div class="sb-footer">
+    <button class="sb-deconnexion" (click)="deconnecter()">
+      <span class="sb-ico">🔓</span>
+      <span class="sb-label">Déconnexion</span>
+    </button>
+  </div>
+</div>
