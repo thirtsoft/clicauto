@@ -23,9 +23,9 @@ export class LoginComponent {
   constructor(private router: Router) { }
 
   roles = [
-    { id: 'vendeur' as Role, ico: '🏪', nom: 'Vendeur', desc: 'Caisse & Ventes' },
+    /*     { id: 'vendeur' as Role, ico: '🏪', nom: 'Vendeur', desc: 'Caisse & Ventes' }, */
     { id: 'gerant' as Role, ico: '🚗', nom: 'Gérant', desc: 'Opérations & Flotte' },
-    { id: 'proprietaire' as Role, ico: '👑', nom: 'Propriétaire', desc: 'Direction' },
+    /*  { id: 'proprietaire' as Role, ico: '👑', nom: 'Propriétaire', desc: 'Direction' }, */
   ];
 
   stats = [
@@ -72,6 +72,19 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.erreur.set('');
+
+
+    setTimeout(() => {
+      this.loading.set(false);
+      this.succes.set(true);
+      setTimeout(() => this.router.navigate(['/gerant/dashboard']), 800);
+    }, 1000);
+
+
+  }
+
+  onSubmitV1() {
     this.erreur.set('');
 
     const email = this.email().trim().toLowerCase();
