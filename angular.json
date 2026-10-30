@@ -18,7 +18,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {
+       "build": {
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
@@ -31,38 +31,10 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
+            "outputMode": "static",
             "security": {
               "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
             }
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "100mb",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "80kB",
-                  "maximumError": "40kB"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular/build:dev-server",
